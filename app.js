@@ -3,6 +3,8 @@ const infoDisplay = document.querySelector('#info')
 const startCells = [
     "", "", "", "", "", "", "", "", ""
 ]
+let go = "circle"
+infoDisplay.textContent= "Circle goes first"
 
 function createBoard() {
     startCells.forEach((_cell, index) => {
@@ -18,7 +20,13 @@ createBoard()
 
 function addGo(e) {
     const goDisplay = document.createElement('div')
-    goDisplay.classList.add('circle')
+    goDisplay.classList.add(go)
     e.target.append(goDisplay)
 
+    go = go === "circle" ? "cross" : "circle"  
+    // if go equals the string circle, we wanna change it to cross. otherwise if t's not, we wanna put circle
+    // infoDisplay.textContent = "it is now" + go " 's go."
+    e.target.removeEventListener("click" , addGo)
+    checkScore()
 }
+
